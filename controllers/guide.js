@@ -12,3 +12,5 @@ var guideController = {
   updateGuide: ,
   destroyGuide:
 }
+
+module.exports = guideController;
