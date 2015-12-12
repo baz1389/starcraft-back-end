@@ -1,5 +1,5 @@
 'use strict';
-var cors = require('cors');
+// var cors = require('cors');
 var express = require('express');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
@@ -18,10 +18,10 @@ var guides = require('./routes/guides');
 
 var app = express();
 
-app.use(cors({
-  origin: ['http://localhost:5000'],
-  credentials: true
-}));
+// app.use(cors({
+//   origin: ['http://localhost:5000'],
+//   credentials: true
+// }));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -33,7 +33,7 @@ app.use(session({
 	resave : false,
 	saveUninitialized : false,
 	store : new MongoStore({
-		url : "mongodb://localhost/guides"
+		url : "mongodb://localhost/guide-sessions"
 	}),
 	cookie : {
 		maxAge : 1200000
