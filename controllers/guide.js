@@ -1,5 +1,3 @@
-
-var util = require('util');
 var mongoose = require("../models/index");
 var passport = require('passport');
 
@@ -29,31 +27,40 @@ var guideController = {
 
 
   create: function(req, res, next) {
-    console.log("here are the create params " + util.inspect(req.body));
-    console.log('req.user is ' + req.user);
 
     Guide.create({
       'playerRace': req.body.playerRace,
       'title': req.body.title,
       'matchup': req.body.matchup,
-      'author': "Ben", //req.user.id
+      'author': req.user.userName,
       'description': req.body.description
     }).then(function(guide) {
       res.json(guide);
     }).catch(function(error){
       next(error);
     });
-  }, //,
-  // update: ,
+  },
+
+
+  update: function(req, res, next) {
+    Guide.findOneAndUpdate({"_id": req.params.id}, {$set: {description: req.body.description}}, {new: true}).exec()
+    .then(function(guide) {
+      res.json(guide);
+    }).catch(function(error) {
+      next(error);
+    });
+  },
+
+
   destroy: function (req, res, next) {
     Guide.findByIdAndRemove(req.params.id).exec()
     .then(function() {
-      res.json('Succesfully Deleted');
+      res.sendStatus(200);
     })
     .catch(function(error){
       next(error);
     });
   }
-}
+};
 
 module.exports = guideController;
