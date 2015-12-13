@@ -4,7 +4,7 @@ var express = require('express');
 var router = express.Router();
 var guideCtrl = require('../controllers/guide.js');
 
-// router.get('/', guideCtrl.readAll);
+router.get('/', guideCtrl.readAll);
 // router.get('/:id', guideCtrl.readOne);
 
 router.post('/', guideCtrl.create);
