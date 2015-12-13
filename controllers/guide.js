@@ -13,7 +13,7 @@ var guideController = {
       'playerRace': req.body.playerRace,
       'title': req.body.title,
       'matchup': req.body.matchup,
-      'author': req.user.id,
+      // 'author': req.user.id,
       'description': req.body.description
     }).then(function(guide) {
       res.json(guide);
