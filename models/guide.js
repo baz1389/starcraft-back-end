@@ -23,7 +23,7 @@ var guideSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  date: {type: String, default: moment().format("MMM Do YY")}
+  date: {type: String, default: moment().format("MMM Do YYYY")}
 
 });
 
