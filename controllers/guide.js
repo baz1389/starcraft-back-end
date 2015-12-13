@@ -1,4 +1,5 @@
 
+var util = require('util');
 var mongoose = require("../models/index");
 var passport = require('passport');
 
@@ -13,13 +14,29 @@ var guideController = {
       next(error);
     });
   },
-  // readOne: ,
+
+
+  readOne: function (req, res, next) {
+    console.log("guide read params id is = ", req.params.id);
+
+    Guide.find({"_id": req.params.id}).exec()
+    .then(function(guide){
+      res.json(guide);
+    }).catch(function(error){
+      next(error);
+    });
+  },
+
+
   create: function(req, res, next){
+    console.log("here are the create params " + util.inspect(req.body));
+    console.log('req.user is ' + req.user);
+
     Guide.create({
       'playerRace': req.body.playerRace,
       'title': req.body.title,
       'matchup': req.body.matchup,
-      // 'author': req.user.id,
+      'author': "Ben", //req.user.id
       'description': req.body.description
     }).then(function(guide) {
       res.json(guide);
