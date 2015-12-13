@@ -28,7 +28,7 @@ var guideController = {
   },
 
 
-  create: function(req, res, next){
+  create: function(req, res, next) {
     console.log("here are the create params " + util.inspect(req.body));
     console.log('req.user is ' + req.user);
 
@@ -43,9 +43,17 @@ var guideController = {
     }).catch(function(error){
       next(error);
     });
-  } //,
+  }, //,
   // update: ,
-  // destroy:
+  destroy: function (req, res, next) {
+    Guide.findByIdAndRemove(req.params.id).exec()
+    .then(function() {
+      res.json('Succesfully Deleted');
+    })
+    .catch(function(error){
+      next(error);
+    });
+  }
 }
 
 module.exports = guideController;
