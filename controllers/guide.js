@@ -6,7 +6,13 @@ var Guide = require('../models').model('Guide');
 var User = require('../models').model('User');
 
 var guideController = {
-  // readAll: ,
+  readAll: function(req, res, next) {
+    Guide.find().exec().then(function(guides) {
+      res.json(guides);
+    }).catch(function(error) {
+      next(error);
+    });
+  },
   // readOne: ,
   create: function(req, res, next){
     Guide.create({
