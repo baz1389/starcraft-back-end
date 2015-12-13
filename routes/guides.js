@@ -11,6 +11,6 @@ router.post('/', guideCtrl.create);
 
 // router.patch('/:id', guideCtrl.update);
 
-// router.delete('/:id', guideCtrl.destroy);
+router.delete('/:id', guideCtrl.destroy);
 
 module.exports = router;
