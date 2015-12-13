@@ -9,7 +9,7 @@ router.get('/:id', guideCtrl.readOne);
 
 router.post('/', guideCtrl.create);
 
-// router.patch('/:id', guideCtrl.update);
+router.patch('/:id', guideCtrl.update);
 
 router.delete('/:id', guideCtrl.destroy);
 
