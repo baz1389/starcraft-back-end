@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-mongoose.Promise = Promise;
+mongoose.Promise = global.Promise;
 
 mongoose.model('User', require('./User'));
 mongoose.model('Guide', require('./guide'));
