@@ -1,11 +1,11 @@
 'use strict';
-// var cors = require('cors');
 var express = require('express');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var util = require('util');
 var session = require('express-session');
 var uuid = require('uuid');
+var cors = require('cors');
 var MongoStore = require('connect-mongo')(session);
 process.env.SESSION_SECRET || require('dotenv').load();
 // require passport
@@ -18,10 +18,10 @@ var guides = require('./routes/guides');
 
 var app = express();
 
-// app.use(cors({
-//   origin: ['http://localhost:5000'],
-//   credentials: true
-// }));
+app.use(cors({
+  origin: ['http://localhost:5000'],
+  credentials: true
+}));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
