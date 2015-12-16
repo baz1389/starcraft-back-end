@@ -43,7 +43,7 @@ var guideController = {
 
 
   update: function(req, res, next) {
-    Guide.findOneAndUpdate({"_id": req.params.id}, {$set: {playerRace: req.body.playerRace, title : req.body.title, matchup : req.body.matchup, description: req.body.description}}, {new: true, "multi": true}).exec()
+    Guide.findOneAndUpdate({"_id": req.params.id, author: req.user.userName}, {$set: {playerRace: req.body.playerRace, title : req.body.title, matchup : req.body.matchup, description: req.body.description}}, {new: true, "multi": true}).exec()
     .then(function(guide) {
       res.json(guide);
     }).catch(function(error) {
@@ -53,7 +53,13 @@ var guideController = {
 
 
   destroy: function (req, res, next) {
-    Guide.findByIdAndRemove(req.params.id).exec()
+    Guide.findOneAndRemove({_id : req.params.id, author: req.user.userName}, function(error, guide) {
+      if(guide === null) {
+        res.sendStatus(401);
+        return;
+      }
+      res.sendStatus(200);
+    }).exec()
     .then(function() {
       res.sendStatus(200);
     })
