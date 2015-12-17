@@ -19,7 +19,7 @@ var guides = require('./routes/guides');
 var app = express();
 
 app.use(cors({
-  origin: ['http://localhost:5000'],
+  origin: ['http://localhost:5000', 'http://baz1389.github.io'],
   credentials: true
 }));
 
@@ -33,7 +33,7 @@ app.use(session({
 	resave : false,
 	saveUninitialized : false,
 	store : new MongoStore({
-		url : "mongodb://localhost/guide-sessions"
+		url : process.env.MONGOLAB_URI
 	}),
 	cookie : {
 		maxAge : 1200000
